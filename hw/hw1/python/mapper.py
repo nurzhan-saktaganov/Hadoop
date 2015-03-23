@@ -8,12 +8,12 @@ __author__ = 'Nurzhan Saktaganov'
 # ,"CMADE","CRECEIVE","RATIOCIT","GENERAL","ORIGINAL","FWDAPLAG","BCKGTLAG","SELFCTUB","SELFCTLB","SECDUPBD","SECDLWBD"
 
 def main():
-	for line in sys.stdin:
-		if line.startswith('"'):
-			continue
-		row = line[:-1].split(',')
+    for line in sys.stdin:
+        if line.startswith('"'):
+            continue
+        row = line[:-1].split(',')
 
-		print '%s\t%s' % (row[GYEAR], row[COUNTRY][1:3])
+        print '%s\t%s' % (row[GYEAR], row[COUNTRY][1:3])
 
 #PATENT   = 0
 GYEAR    = 1
@@ -40,4 +40,4 @@ COUNTRY  = 4
 #SECDLWBD = 22
 
 if __name__ == '__main__':
-	main()
+    main()
