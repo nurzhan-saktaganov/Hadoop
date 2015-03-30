@@ -1,7 +1,12 @@
 #!/bin/sh
 
+rm -r classes
+mkdir classes
+javac -d classes/ HomeWork2.java
+jar -cvf hw2.jar -C classes/ ./
+
 INPUT='/data/patents/cite75_99.txt'
-OUTPUT='python_PageRank_Step_0'
+OUTPUT='java_PageRank_Step_0'
 
 hadoop fs -rm -r ${OUTPUT}
 hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
@@ -14,17 +19,11 @@ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
 for ((i=1;i<=30;i++))
 do
     INPUT=${OUTPUT}
-    OUTPUT='python_PageRank_Step_'${i}
+    OUTPUT='java_PageRank_Step_'${i}
 
     hadoop fs -rm -r ${OUTPUT}
-    hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
-        -file mapper.py reducer.py \
-        -mapper mapper.py \
-        -reducer reducer.py \
-        -input ${INPUT} \
-        -output ${OUTPUT}
+    hadoop jar hw2.jar org.myorg.HomeWork2 ${INPUT}  ${OUTPUT}
     hadoop fs -rm -r ${INPUT}
 
 #    hadoop fs -text ${OUTPUT}/part* | sort -k2,2nr | head > ${OUTPUT}_top.txt
 done
-
