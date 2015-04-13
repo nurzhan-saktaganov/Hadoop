@@ -1,11 +1,11 @@
-apat = LOAD '/user/n.saktaganov/patents/apat63_99.txt'
+apat = LOAD '/data/patents/apat63_99.txt'
 	USING PigStorage(',')
 	AS (patent:long, gyear: int, gdate: int,
 	appyear:chararray, country: chararray);  
 
 apatUSA1990 = FILTER apat BY gyear==1990 AND country=='"US"';
 
-cite = LOAD '/user/n.saktaganov/patents/cite75_99.txt'
+cite = LOAD '/data/patents/cite75_99.txt'
 	USING PigStorage(',')
 	AS (citing: long, cited: long);
 
