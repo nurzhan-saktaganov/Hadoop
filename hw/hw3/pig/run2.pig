@@ -19,10 +19,12 @@ apat = LOAD '/data/patents/apat63_99.txt'
 	, selfctub: chararray, selfctlb: chararray, secdupbd: chararray
 	, secdlwbd: chararray);
 
-apatAndCiteCount = JOIN citingCount
-	BY patent LEFT OUTER,
-	apat BY patent;
-	
+apatUSA1990 = FILTER apat BY gyear==1990 AND country=='"US"';
+
+apatAndCiteCount = JOIN
+	citingCount	BY patent,
+	apatUSA1990 BY patent;
+
 orderedApatAndCiteCount = ORDER apatAndCiteCount
 	BY linkCount DESC;
 
